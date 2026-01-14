@@ -1,5 +1,6 @@
 import javax.print.DocFlavor;
 import java.time.LocalDate;
+import java.util.Stack;
 
 public class UniversityManeger {
 
@@ -14,21 +15,21 @@ public class UniversityManeger {
     private Dean[] deansArray =new Dean[10];
         private int deanIndex=0;
 
+    //Security
+    private  Security[] securitieArray=new Security[10];
+        private  int securitieIndex=0;
 
-    /*
-    University Manegr
-     */
+
+    /*   University Manegr */
     public UniversityManeger(String universityname) {
         this.universityname = universityname;
     }
-
     public String getUniversityname() {
         return universityname;
     }
 
-    /*
-    Subject Manegr
-     */
+
+    /* Subject Manegr */
     public Subject createSubject(String name, int semester){
         Subject subject=new Subject();
 
@@ -55,15 +56,13 @@ public class UniversityManeger {
         subjectArray[subjectIndex++]=subject;
         return subject;
     }
-
     public Subject getsubjectByName(String name){
         for (Subject s:subjectArray){
             if (s!=null && s.getName().equals(name)) return s;
         }
         return null;
     }
-
-    public  Subject getSubjectById(int Id){
+    public Subject getSubjectById(int Id){
         for (Subject s:subjectArray){
             if (s!=null && s.getId().equals(s.getId())){
                 return s;
@@ -71,7 +70,6 @@ public class UniversityManeger {
         }
         return null;
     }
-
     public boolean chekSubject(Subject subject){
         if (subject.getName()==null || subject.getName().length()<3){
             System.out.println("Fan xato !!!");
@@ -85,10 +83,9 @@ public class UniversityManeger {
         return true;
     }
 
-    /*
-    Dekan Menager
-     */
-    public  Dean creatDean(String name, String surname, Integer age, String birthDate, String faculty, Double salary, LocalDate employeDate){
+
+    /* Dekan Menager */
+    public Dean creatDean(String name, String surname, Integer age, String birthDate, String faculty, Double salary){
         Dean dean=new Dean();
 
         Dean exists= getDeanByFaculty(dean.getFaculty());
@@ -124,7 +121,6 @@ public class UniversityManeger {
         }
         return null;
     }
-
     public Dean getDeanById(Integer id){
         for (Dean d:deansArray){
             if (d!=null && d.getId().equals(id)){
@@ -133,7 +129,6 @@ public class UniversityManeger {
         }
     return null;
     }
-
     public LocalDate getDeanEmployedDateById(Integer id){
         for (Dean d:deansArray){
             if (d!=null && d.getId().equals(id)){
@@ -141,5 +136,40 @@ public class UniversityManeger {
             }
         }
         return null;
+    }
+
+    /* Security */
+    public  Security createSecurity(String name, String surname, int age, String birthDate, Double salary, String militaryRank){
+        Security security=new Security();
+        security.setId(Id++);
+        security.setName(name);
+        security.setSurname(surname);
+        security.setAge(age);
+        security.setBirthDate(birthDate);
+        security.setSalary(salary);
+        security.setBirthDate(birthDate);
+        security.setMilitaryRank(militaryRank);
+
+        if (securitieArray.length==securitieIndex){
+            Security [] newsecuritiesArray=new Security[2*securitieArray.length];
+            for(int i=0;i<securitieArray.length;i++){
+                newsecuritiesArray[i]=securitieArray[i];
+            }
+            securitieArray=newsecuritiesArray;
+        }
+        securitieArray[securitieIndex++]=security;
+
+        return security;
+    }
+
+    public Security[] getSecurityListByMilitaryRank(String militaryRank){
+        Security[] temp=new Security[securitieIndex];
+        int index=0;
+        for (Security security:securitieArray){
+            if (security!=null && security.getMilitaryRank().contains(militaryRank)){
+                temp[index]=security;
+            }
+        }
+    return temp;
     }
 }

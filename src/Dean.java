@@ -14,6 +14,20 @@ public class Dean {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Dean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", birthDate='" + birthDate + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", salary=" + salary +
+                ", employeDate=" + employeDate +
+                '}';
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
