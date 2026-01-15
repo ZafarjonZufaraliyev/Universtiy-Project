@@ -7,17 +7,21 @@ public class UniversityManeger {
     private String universityname;
     private  int Id=1;
 
-    //Subject
+    // Subject
     private Subject [] subjectArray=new Subject[10];
         private int subjectIndex=0;
 
-    //Dean
+    // Dean
     private Dean[] deansArray =new Dean[10];
         private int deanIndex=0;
 
-    //Security
+    // Security
     private  Security[] securitieArray=new Security[10];
         private  int securitieIndex=0;
+
+    // Professor
+    private Professor[] professorArray=new Professor[10];
+        private int professorindex=0;
 
 
     /*   University Manegr */
@@ -62,9 +66,9 @@ public class UniversityManeger {
         }
         return null;
     }
-    public Subject getSubjectById(int Id){
+    public Subject getSubjectById(Integer id){
         for (Subject s:subjectArray){
-            if (s!=null && s.getId().equals(s.getId())){
+            if (s!=null && s.getId().equals(id)){
                 return s;
             }
         }
@@ -161,7 +165,6 @@ public class UniversityManeger {
 
         return security;
     }
-
     public Security[] getSecurityListByMilitaryRank(String militaryRank){
         Security[] temp=new Security[securitieIndex];
         int index=0;
@@ -172,4 +175,62 @@ public class UniversityManeger {
         }
     return temp;
     }
+
+    /* Professor */
+    public Professor createProfessor(String name,String surname,String birthDate,Integer subjectId, int age,Double salary){
+        Subject subject1=getSubjectById(subjectId);
+        if (subject1==null){
+            System.out.println("Subject not found");
+            return  null;
+        }
+
+        Professor professor=new Professor();
+        professor.setId(Id++);
+        professor.setName(name);
+        professor.setSurname(surname);
+        professor.setAge(age);
+        professor.setBirthDate(birthDate);
+        professor.setSubject(subject1);
+        professor.setSalary(salary);
+
+        if (professorArray.length==professorindex){
+            Professor[] newprofessorArray=new Professor[professorArray.length*2];
+            for (int i=0;i<professorArray.length; i++){
+                newprofessorArray[i]=professorArray[i];
+            }
+            professorArray=newprofessorArray;
+        }
+
+        professorArray[professorindex++]=professor;
+        return professor;
+    }
+
+    public Professor getProfessorById(Integer id){
+        for (Professor p:professorArray){
+            if (p!=null && p.getId().equals(id)){
+                return p;
+            }
+        }
+        return null;
+    }
+    public Professor getProfessorByNameAndBySurname(String name, String surname){
+        for (Professor professor:professorArray){
+            if (professor!=null && professor.getName().equals(name) && professor.getSurname().equals(surname)){
+                return professor;
+            }
+        }
+        return null;
+    }
+    public Professor[] getProfessorListBySubjectId(Integer subjectId){
+        Professor [] localprofessorsArray=new Professor[professorindex];
+        int exesprofessorIndex=0;
+        for (Professor professor:professorArray){
+            if (professor!=null && professor.getSubject().getId().equals(subjectId)){
+                localprofessorsArray[exesprofessorIndex++]=professor;
+
+            }
+        }
+        return localprofessorsArray;
+    }
 }
+

@@ -3,6 +3,15 @@ public class Subject {
     private String name;
     private int semester;
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", semester=" + semester +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
