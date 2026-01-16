@@ -8,17 +8,17 @@ public class Professor extends  Person{
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "Professor{" +
-//                "id=" + getId() +
-//                ", name='" + getName() + '\'' +
-//                ", surname='" + getSurname() + '\'' +
-//                ", birthDate='" + getBirthDate()+ '\'' +
-//                ", subjectId=" + subject +
-//                ", salary=" + getSalary() +
-//                '}';
-//    }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDate='" + birthDate+ '\'' +
+                ", subjectId=" + subject +
+                ", salary=" + salary +
+                '}';
+    }
 
 }

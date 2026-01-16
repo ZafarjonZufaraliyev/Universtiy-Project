@@ -22,17 +22,17 @@ public class Dean extends Person{
     }
 
 
-//    @Override
-//    public String toString() {
-//        return "Dean{" +
-//                "id=" + getId() +
-//                ", name='" + getName() + '\'' +
-//                ", surname='" + getSurname() + '\'' +
-//                ", age=" + getAge() +
-//                ", birthDate='" + getBirthDate() + '\'' +
-//                ", faculty='" + faculty + '\'' +
-//                ", salary=" + getSalary() +
-//                ", employeDate=" + employeDate +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Dean{" +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", birthDate='" + birthDate + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", salary=" + salary +
+                ", employeDate=" + employeDate +
+                '}';
+    }
 }

@@ -10,15 +10,15 @@ public class Security extends Person{
         this.militaryRank = militaryRank;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Security{" +
-//                "id=" + getId() +
-//                ", name='" + getName() + '\'' +
-//                ", surname='" + getSurname() + '\'' +
-//                ", birthDate='" + getBirthDate() + '\'' +
-//                ", salary=" + getSalary() +
-//                ", militaryRank='" + militaryRank + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Security{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", salary=" + salary +
+                ", militaryRank='" + militaryRank + '\'' +
+                '}';
+    }
 }

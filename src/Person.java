@@ -1,10 +1,10 @@
 public class Person {
-    private Integer id;
-    private String name;
-    private String surname;
-    private int age;
-    private String  birthDate;
-    private Double salary;
+    protected Integer id;
+    protected String name;
+    protected String surname;
+    protected int age;
+    protected String  birthDate;
+    protected Double salary;
 
     public Integer getId() {
         return id;
@@ -53,4 +53,6 @@ public class Person {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
+
+
 }
