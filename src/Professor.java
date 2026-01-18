@@ -1,4 +1,4 @@
-public class Professor extends  Person{
+public class Professor extends  Employee{
     private Subject subject;
 
     public Subject getSubject() {

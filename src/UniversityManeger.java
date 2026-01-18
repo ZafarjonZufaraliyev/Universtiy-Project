@@ -21,7 +21,11 @@ public class UniversityManeger {
 
     // Professor
     private Professor[] professorArray=new Professor[10];
-        private int professorindex=0;
+        private int professorIndex=0;
+
+    // Student
+    private Student[] studentsArray=new Student[10];
+        private int studentsIndex=0;
 
 
     /*   University Manegr */
@@ -142,6 +146,7 @@ public class UniversityManeger {
         return null;
     }
 
+
     /* Security */
     public  Security createSecurity(String name, String surname, int age, String birthDate, Double salary, String militaryRank){
         Security security=new Security();
@@ -176,6 +181,7 @@ public class UniversityManeger {
     return temp;
     }
 
+
     /* Professor */
     public Professor createProfessor(String name,String surname,String birthDate,Integer subjectId, int age,Double salary){
         Subject subject1=getSubjectById(subjectId);
@@ -193,7 +199,7 @@ public class UniversityManeger {
         professor.setSubject(subject1);
         professor.setSalary(salary);
 
-        if (professorArray.length==professorindex){
+        if (professorArray.length==professorIndex){
             Professor[] newprofessorArray=new Professor[professorArray.length*2];
             for (int i=0;i<professorArray.length; i++){
                 newprofessorArray[i]=professorArray[i];
@@ -201,10 +207,9 @@ public class UniversityManeger {
             professorArray=newprofessorArray;
         }
 
-        professorArray[professorindex++]=professor;
+        professorArray[professorIndex++]=professor;
         return professor;
     }
-
     public Professor getProfessorById(Integer id){
         for (Professor p:professorArray){
             if (p!=null && p.getId().equals(id)){
@@ -222,7 +227,7 @@ public class UniversityManeger {
         return null;
     }
     public Professor[] getProfessorListBySubjectId(Integer subjectId){
-        Professor [] localprofessorsArray=new Professor[professorindex];
+        Professor [] localprofessorsArray=new Professor[professorIndex];
         int exesprofessorIndex=0;
         for (Professor professor:professorArray){
             if (professor!=null && professor.getSubject().getId().equals(subjectId)){
@@ -231,6 +236,71 @@ public class UniversityManeger {
             }
         }
         return localprofessorsArray;
+    }
+
+
+    /* Student */
+    public Student createStudent(String name,String surname,int age,String birthDate,Integer level){
+
+        Student student=new Student();
+        student.setId(Id++);
+        student.setName(name);
+        student.setSurname(surname);
+        student.setAge(age);
+        student.setBirthDate(birthDate);
+        student.setLevel(level);
+        if (studentsArray.length==studentsIndex){
+            Student newStudentsArry[]=new Student[studentsArray.length*2];
+            for (int i=0;i<studentsArray.length;i++){
+                newStudentsArry[i]=studentsArray[i];
+            }
+            studentsArray=newStudentsArry;
+        }
+        studentsArray[studentsIndex++]=student;
+        return student;
+    }
+    public Student addSubjectToStudent(Integer studentId,Integer subjectId){
+        Student student=getStudentById(studentId);
+        if (student==null){
+            System.out.println("Student not found");
+            return null;
+        }
+        Subject subject=getSubjectById(subjectId);
+        if (subject==null){
+            System.out.println("Subject not found");
+            return null;
+        }
+        student.addSubject(subject);
+        return student;
+    }
+    public Student getStudentById(Integer id){
+        for (Student student:studentsArray){
+            if (student!=null && student.getId().equals(id)){
+                return student;
+            }
+        }
+        return  null;
+    }
+    public Student[] getStudentListBySubjectId(Integer subjectId){
+        Student[] tempSubject=new Student[10];
+        int tempSubjectId=0;
+        for (Student student:studentsArray){
+            if (student==null){
+                continue;
+            }
+//            for (Subject subject:student.getSubjectArray())
+        }
+        return tempSubject;
+    }
+    public Student[] getStudentListByLevel(Integer level){
+        Student levelStudent[]=new Student[studentsIndex];
+        int tempStudenIndex=0;
+        for (Student student:studentsArray){
+            if (student!=null && student.getLevel().equals(level)){
+                levelStudent[tempStudenIndex++]=student;
+            }
+        }
+        return levelStudent;
     }
 }
 

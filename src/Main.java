@@ -54,7 +54,20 @@ public class Main {
 //        System.out.println(professor3);
 //        Professor tempProfessor=university.getProfessorById(professor1.getId());
 //        System.out.println(university.getProfessorByNameAndBySurname("Sardor","Olimov"));
-//        System.out.println(tempProfessor);
-
+//        System.out.println(t
+//        empProfessor);
+        Student student= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",4);
+        Student student1= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",4);
+        Student student2= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",2);
+        Student[] tempStudent=university.getStudentListByLevel(student.getLevel());
+        for (Student s:tempStudent){
+                if (s!=null){
+                    System.out.println(s);
+                }
+        }
+        university.addSubjectToStudent(student.getId(),subjectCpp.getId());
+        university.addSubjectToStudent(student1.getId(),subjectCpp.getId());
+        university.addSubjectToStudent(student2.getId(),subjectMath.getId());
+        System.out.println();
     }
 }

@@ -4,7 +4,7 @@ public class Person {
     protected String surname;
     protected int age;
     protected String  birthDate;
-    protected Double salary;
+
 
     public Integer getId() {
         return id;
@@ -46,13 +46,7 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public Double getSalary() {
-        return salary;
-    }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
-    }
 
 
 }
