@@ -42,13 +42,13 @@ public class Main {
         Professor professor2=university.createProfessor("Anvar","Aliyev","1911-12-12",subjectJava.getId(),55,120000d);
         Professor professor3=university.createProfessor("Golib","Xojiyev","2000-07-12",subjectCpp.getId(),45,34000d);
 
-        Professor[] tempProfessor=university.getProfessorListBySubjectId(subjectJava.getId());
-        for (Professor professor:tempProfessor){
-            if (professor!=null){
-                System.out.println(professor);
-            }
-        }
-        System.out.println();
+//        Professor[] tempProfessor=university.getProfessorListBySubjectId(subjectJava.getId());
+//        for (Professor professor:tempProfessor){
+//            if (professor!=null){
+//                System.out.println(professor);
+//            }
+//        }
+
 //        System.out.println(professor1);
 //        System.out.println(professor2);
 //        System.out.println(professor3);
@@ -59,15 +59,43 @@ public class Main {
         Student student= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",4);
         Student student1= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",4);
         Student student2= university.createStudent("Zafar","Zufaraov",12,"1998-12-12",2);
-        Student[] tempStudent=university.getStudentListByLevel(student.getLevel());
-        for (Student s:tempStudent){
-                if (s!=null){
-                    System.out.println(s);
-                }
-        }
+//        Student[] tempStudent=university.getStudentListByLevel(student.getLevel());
+//        for (Student s:tempStudent){
+//                if (s!=null){
+//                    System.out.println(s);
+//                }
+//        }
         university.addSubjectToStudent(student.getId(),subjectCpp.getId());
         university.addSubjectToStudent(student1.getId(),subjectCpp.getId());
         university.addSubjectToStudent(student2.getId(),subjectMath.getId());
-        System.out.println();
+        Student[] tempStuden=university.getStudentListBySubjectId(subjectMath.getId());
+        for (Student student3:tempStuden){
+            if (student3!=null){
+                System.out.println(student3);
+            }
+        }
+        System.out.println(university.createExam(student1.getId(),subjectMath.getId(),4));
+
+        //Event
+
+        Event event=university.createEvent("Atrofni tozalash",professor3.getId());
+        Event event3=university.createEvent("Siyosat bugun",professor1.getId());
+        Event event4=university.createEvent("Jiyosat jahon",professor3.getId());
+        System.out.println(event);
+        Event[] events=university.getEventListByProfessorId(professor3.getId());
+        for (Event event1:events){
+            if (event1!=null){
+                System.out.println(event1);
+            }
+        }
+
+        Object[] allpeople=university.getAllEmployeeList();
+        for (Object o:allpeople){
+            if (o!=null){
+                System.out.println(o);
+            }
+        }
+
+        System.out.println(university.getAllEmployeeListSalary());
     }
 }

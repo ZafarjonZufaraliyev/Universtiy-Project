@@ -1,5 +1,6 @@
 import javax.print.DocFlavor;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Stack;
 
 public class UniversityManeger {
@@ -26,6 +27,14 @@ public class UniversityManeger {
     // Student
     private Student[] studentsArray=new Student[10];
         private int studentsIndex=0;
+
+    //Exam
+    private Exam[] examsArray=new Exam[10];
+        private int examIndex=0;
+
+    //Event
+    private Event[] eventsArray=new Event[10];
+        private int eventIndex=0;
 
 
     /*   University Manegr */
@@ -241,7 +250,6 @@ public class UniversityManeger {
 
     /* Student */
     public Student createStudent(String name,String surname,int age,String birthDate,Integer level){
-
         Student student=new Student();
         student.setId(Id++);
         student.setName(name);
@@ -271,6 +279,7 @@ public class UniversityManeger {
             return null;
         }
         student.addSubject(subject);
+        subject.addStudent(student);
         return student;
     }
     public Student getStudentById(Integer id){
@@ -281,17 +290,6 @@ public class UniversityManeger {
         }
         return  null;
     }
-    public Student[] getStudentListBySubjectId(Integer subjectId){
-        Student[] tempSubject=new Student[10];
-        int tempSubjectId=0;
-        for (Student student:studentsArray){
-            if (student==null){
-                continue;
-            }
-//            for (Subject subject:student.getSubjectArray())
-        }
-        return tempSubject;
-    }
     public Student[] getStudentListByLevel(Integer level){
         Student levelStudent[]=new Student[studentsIndex];
         int tempStudenIndex=0;
@@ -301,6 +299,150 @@ public class UniversityManeger {
             }
         }
         return levelStudent;
+    }
+    public Student[] getStudentListBySubjectId(Integer subjectId){
+        Subject subject=getSubjectById(subjectId);
+        if (subject==null){
+            System.out.println("subject not found");
+            return null;
+        }
+        return subject.getStudentsArray();
+    }
+
+    /* Exam */
+    public Exam createExam(Integer student, Integer subject, Integer grade){
+       Student student1=getStudentById(student);
+        if (student1==null){
+            System.out.println("Student not found");
+            return null;
+        }
+        Subject subject1=getSubjectById(subject);
+        if (subject1==null){
+            System.out.println("Subject not found");
+            return null;
+        }
+        Exam exam=new Exam();
+        exam.setId(Id++);
+        exam.setStudent(student1);
+        exam.setSubject(subject1);
+        exam.setGrade(grade);
+
+        if (examsArray.length==examIndex){
+            Exam newExamArry[]=new Exam[examsArray.length*2];
+            for (int i=0;i<examsArray.length;i++){
+                newExamArry[i]=examsArray[i];
+            }
+            examsArray=newExamArry;
+        }
+        examsArray[examIndex++]=exam;
+        return exam ;
+    }
+    public Exam[] getStudentExamList(Integer Studentid){
+        Exam[] tempexam=new Exam[examIndex];
+        int tempindex=0;
+        for (Exam exam:examsArray){
+            if (exam!=null && exam.getStudentId().equals(Studentid)){
+                tempexam[tempindex++]=exam;
+            }
+        }
+        return tempexam;
+    }
+    public Exam[] getStudentListByExamSubjectId(Integer subjectId){
+        Exam[] temStudent=new Exam[studentsIndex];
+        int tempIndex=0;
+        for (Exam exam:examsArray){
+            if (exam!=null && exam.getSubjectId().equals(subjectId)){
+                temStudent[tempIndex++]=exam;
+            }
+        }
+        return temStudent;
+    }
+    public Exam[] getStudentListByExamGrate(Integer subjectId, Integer grade){
+        Exam[] tempExam=new Exam[studentsIndex];
+        int tepmExamIndex=0;
+        for (Exam exam:examsArray){
+            if (exam!=null && exam.getSubjectId().equals(subjectId) && exam.getGrade().equals(grade)){
+                tempExam[tepmExamIndex++]=exam;
+            }
+        }
+    return tempExam;
+    }
+
+    //Event
+    public Event createEvent(String name,Integer professorid){
+        Professor professor=getProfessorById(professorid);
+        if (professor==null){
+            System.out.println("Professor not found");
+            return null;
+        }
+        Event event=new Event();
+        event.setId(Id++);
+        event.setName(name);
+        event.setProfessor(professor);
+        event.setCreatData(new Date());
+
+        if (eventsArray.length==eventIndex){
+            Event newEventArry[]=new Event[eventsArray.length*2];
+            for (int i=0;i<eventsArray.length;i++){
+                newEventArry[i]=eventsArray[i];
+            }
+            eventsArray=newEventArry;
+        }
+
+        eventsArray[eventIndex++]=event;
+        return event;
+    }
+    public Event[] getEventListByProfessorId(Integer professorId){
+        Event [] tempEventsArray=new Event[examIndex];
+        int tempindex=0;
+        for (Event event:eventsArray){
+            if (event!=null && event.getProfessorId().equals(professorId)){
+                tempEventsArray[tempindex]=event;
+            }
+        }
+        return tempEventsArray;
+    }
+
+
+
+    public Object[] getAllEmployeeList(){
+        Object[] obj=new Object[professorIndex+subjectIndex+deanIndex];
+        int tempIndex=0;
+        for (Professor professor:professorArray){
+            if (professor!=null){
+                obj[tempIndex++]=professor;
+            }
+        }
+        for (Dean dean:deansArray){
+            if (dean!=null){
+                obj[tempIndex++]=dean;
+            }
+        }
+        for (Security security:securitieArray){
+            if (security!=null){
+                obj[tempIndex++]=security;
+            }
+        }
+        return obj;
+    }
+    public Double getAllEmployeeListSalary(){
+        Double totoleSalary=0.0;
+        for (Professor professor:professorArray){
+            if (professor!=null){
+                totoleSalary=totoleSalary+professor.getSalary();
+            }
+        }
+        for (Dean dean:deansArray){
+            if (dean!=null){
+                totoleSalary=totoleSalary+dean.getSalary();
+            }
+        }
+        for (Security security:securitieArray){
+            if (security!=null){
+                totoleSalary=totoleSalary+security.getSalary();
+            }
+        }
+        return totoleSalary;
     }
 }
 
